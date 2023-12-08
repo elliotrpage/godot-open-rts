@@ -75,6 +75,24 @@ func _unhandled_input(event):
 		if _is_rotating():
 			_rotate(mouse_pos)
 
+# EP: Keyboard Rotation
+func _unhandled_key_input(event):
+	if event is InputEventKey:
+		if event.is_pressed() and event.is_action("rotate_camera_left"):
+			print(get_viewport().get_mouse_position()) # EP HACK DEBUG - Output on MBA: (1610, 1182)
+			# EP: Invoke an adapted / cut down version of _rotate with the calculations cut out and a static value attached
+			#_start_rotation(event) # EP: Superflouous?
+			#_rotate(mouse_pos) # replace mouse_pos with something else to generate a static rate of rotation?
+			# I need to mimic this to see how mouse_pos appears. also will want to make a variable to be used later so people can customise rotation speed.
+			pass
+		elif event.is_released() and event.is_action("rotate_camera_left"):
+			_stop_rotation() # EP Superflouous?
+		elif event.is_pressed() and event.is_action("rotate_camera_right"):
+			#_start_rotation(event) # EP: Superflouous?
+			pass
+		elif event.is_released() and event.is_action("rotate_camera_right"):
+			_stop_rotation() # EP Superflouous?
+	pass
 
 func set_size_safely(a_size):
 	if a_size == size:
